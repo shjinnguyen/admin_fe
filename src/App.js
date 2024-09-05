@@ -15,6 +15,8 @@ import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
 import Category from "./pages/category/Category";
 import Sku from "./pages/sku/Sku";
+import Supplier from "./pages/supplier/Supplier";
+import Product from "./pages/product/Product";
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
           <Route exact path="/unit" component={Unit} />
           <Route exact path="/category" component={Category} />
           <Route exact path="/sku" component={Sku} />
+          <Route exact path="/supplier" component={Supplier} />
+          <Route exact path="/product" component={Product} />
         </Main>
       </Switch>
     </div>

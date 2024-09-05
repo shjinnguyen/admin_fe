@@ -8,6 +8,7 @@ import {
   saveSku,
   updateSku,
 } from "../../services/sku-service";
+import { getProducts } from "../../services/product-service";
 
 const columns = [
   {
@@ -17,10 +18,13 @@ const columns = [
     editable: true,
   },
   {
-    key: "product",
+    key: "productId",
     title: "Product",
-    dataIndex: "product",
+    dataIndex: "productId",
     editable: true,
+    inputType: "select",
+    apiSearch: getProducts,
+    render: (text, record) => <span>{record.product}</span>,
   },
 ];
 
