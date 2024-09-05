@@ -13,8 +13,8 @@ import {
   Typography,
   Popconfirm,
   Space,
-  Button,
 } from "antd";
+import SelectInput from "../select-input/category";
 
 const EditableCell = ({
   editing,
@@ -26,7 +26,21 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
+  let inputNode = "text";
+
+  switch (inputType) {
+    case "number":
+      inputNode = <InputNumber />;
+      break;
+    case "text":
+      inputNode = <Input />;
+      break;
+    case "select":
+      let { apiSearch } = restProps;
+      inputNode = <SelectInput apiSearch={apiSearch} />;
+      break;
+  }
+
   return (
     <td {...restProps}>
       {editing ? (
@@ -97,9 +111,10 @@ const InlineEditableTable = forwardRef(
     const save = async (key) => {
       try {
         const row = await form.validateFields();
-        const isUpdate = row?.id > 0;
+        const isUpdate = key > 0;
 
         if (isUpdate) {
+          row.id = key;
           await updateItem(row);
           setEditingKey("");
         } else {
@@ -162,10 +177,11 @@ const InlineEditableTable = forwardRef(
         ...col,
         onCell: (record) => ({
           record,
-          inputType: col.dataIndex === "age" ? "number" : "text",
+          inputType: col.inputType || "text",
           dataIndex: col.dataIndex,
           title: col.title,
           editing: isEditing(record),
+          ...col,
         }),
       };
     });
