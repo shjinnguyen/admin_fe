@@ -168,7 +168,7 @@ function Sidenav({ color }) {
       </div>
       <hr />
       <Menu theme="light" mode="inline">
-        <Menu.Item key="1">
+        {/* <Menu.Item key="1">
           <NavLink to="/dashboard">
             <span
               className="icon"
@@ -248,7 +248,7 @@ function Sidenav({ color }) {
             <span className="icon">{signup}</span>
             <span className="label">Sign Up</span>
           </NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
 
         {menuItems.map((item, index) => (
           <Menu.Item key={9 + index}>
@@ -289,6 +289,18 @@ function Sidenav({ color }) {
 
 const menuItems = [
   {
+    url: "/inventory",
+    title: "Inventory",
+  },
+  {
+    url: "/inventory-import",
+    title: "Inventory Im/Export",
+  },
+  {
+    url: "/product",
+    title: "Product",
+  },
+  {
     url: "/unit",
     title: "Unit",
   },
@@ -296,10 +308,7 @@ const menuItems = [
     url: "/category",
     title: "Category",
   },
-  {
-    url: "/product",
-    title: "Product",
-  },
+
   {
     url: "/sku",
     title: "Sku",
@@ -307,14 +316,6 @@ const menuItems = [
   {
     url: "/supplier",
     title: "Supplier",
-  },
-  {
-    url: "/inventory-import",
-    title: "Inventory Im/Export",
-  },
-  {
-    url: "/inventory",
-    title: "Inventory",
   },
 ];
 
