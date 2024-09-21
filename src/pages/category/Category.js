@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Button, Card, Col, Row } from "antd";
 
 import InlineEditableTable from "../../components/table/inline-editable-table";

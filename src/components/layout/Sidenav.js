@@ -308,6 +308,14 @@ const menuItems = [
     url: "/supplier",
     title: "Supplier",
   },
+  {
+    url: "/inventory-import",
+    title: "Inventory Im/Export",
+  },
+  {
+    url: "/inventory",
+    title: "Inventory",
+  },
 ];
 
 export default Sidenav;

@@ -12,7 +12,6 @@ import {
 import { getSuppliers } from "../../services/supplier-service";
 import { getUnits } from "../../services/unit-service";
 import { getCategories } from "../../services/category-service";
-import { render } from "@testing-library/react";
 
 const columns = [
   {

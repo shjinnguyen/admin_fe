@@ -14,6 +14,7 @@ import {
   Popconfirm,
   Space,
 } from "antd";
+
 import SelectInput from "../select-input/category";
 
 const EditableCell = ({
@@ -38,6 +39,8 @@ const EditableCell = ({
     case "select":
       let { apiSearch } = restProps;
       inputNode = <SelectInput apiSearch={apiSearch} />;
+      break;
+    default:
       break;
   }
 

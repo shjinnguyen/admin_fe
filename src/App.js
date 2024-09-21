@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Tables from "./pages/Tables";
 import Billing from "./pages/Billing";
@@ -10,13 +10,17 @@ import Unit from "./pages/unit/Unit";
 
 import Main from "./components/layout/Main";
 
-import "antd/dist/antd.css";
-import "./assets/styles/main.css";
-import "./assets/styles/responsive.css";
 import Category from "./pages/category/Category";
 import Sku from "./pages/sku/Sku";
 import Supplier from "./pages/supplier/Supplier";
 import Product from "./pages/product/Product";
+import Inventory from "./pages/inventory/Inventory";
+import ImportPage from "./pages/inventory/Import";
+
+import "antd/dist/antd.css";
+import "./assets/styles/main.css";
+import "./assets/styles/responsive.css";
+import InventoryForm from "./pages/inventory/ImportV2";
 
 function App() {
   return (
@@ -35,6 +39,8 @@ function App() {
           <Route exact path="/sku" component={Sku} />
           <Route exact path="/supplier" component={Supplier} />
           <Route exact path="/product" component={Product} />
+          <Route exact path="/inventory" component={Inventory} />
+          <Route exact path="/inventory-import" component={InventoryForm} />
         </Main>
       </Switch>
     </div>
