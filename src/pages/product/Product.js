@@ -186,19 +186,31 @@ const ProductTable = () => {
                 }}
               />
             ) : thumbnail ? (
-              <img
-                src={imageUrl}
-                alt="Thumbnail"
-                style={{
-                  width: 100,
-                  height: 100,
-                  objectFit: "cover",
-                  cursor: "pointer",
-                }}
-                onClick={() =>
-                  document.getElementById(`file-upload-${record.id}`).click()
-                }
-              />
+              <>
+                <img
+                  src={imageUrl}
+                  alt="Thumbnail"
+                  style={{
+                    width: 100,
+                    height: 100,
+                    objectFit: "cover",
+                    cursor: "pointer",
+                  }}
+                  onClick={() =>
+                    document.getElementById(`file-upload-${record.id}`).click()
+                  }
+                />
+                <input
+                  type="file"
+                  id={`file-upload-${record.id}`}
+                  hidden
+                  onChange={(event) => {
+                    const file = event.target.files[0];
+                    setFile(file);
+                    setFilePreviewUrl(URL.createObjectURL(file));
+                  }}
+                />
+              </>
             ) : (
               <Upload
                 showUploadList={false}
