@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import {
   Form,
   Input,
@@ -9,11 +8,13 @@ import {
   Card,
   Select,
   Table,
+  Modal,
 } from "antd";
 import {
   importInventory,
   exportInventory,
 } from "../../services/inventory-service";
+import { getProducts, linkProduct } from "../../services/product-service";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -25,6 +26,9 @@ const InventoryForm = () => {
   const [quantity, setQuantity] = useState("");
   const [type, setType] = useState("import");
   const [addedProducts, setAddedProducts] = useState([]);
+  const [openProductLinkModal, setOpenProductLinkModal] = useState(false);
+  const [selectToLinkProductId, setSelectToLinkProductId] = useState(null);
+  const [barcodeToLinkProduct, setBarcodeToLinkProduct] = useState(null);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
   const productSelectRef = useRef(null);
@@ -33,9 +37,7 @@ const InventoryForm = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          "http://103.163.119.150:8080/products"
-        );
+        const response = await getProducts();
         setProducts(response.data);
         setFilteredProducts(response.data);
       } catch (error) {
@@ -78,8 +80,8 @@ const InventoryForm = () => {
     productSelectRef.current.focus();
   };
 
-  const handleProductChange = (value) => {
-    const product = products.find((p) => p.id === value);
+  const handleProductChange = (productId) => {
+    const product = products.find((p) => p.id === productId);
     setSelectedProduct(product);
     quantityInputRef.current.focus();
   };
@@ -114,6 +116,19 @@ const InventoryForm = () => {
     }
   };
 
+  const selectProductByBarcode = async (barcode) => {
+    const products = await getProducts({ barcode });
+    const product = products.data?.[0];
+
+    handleProductChange(product?.id);
+
+    if (!product) {
+      alert("Không tìm thấy sản phẩm");
+      setBarcodeToLinkProduct(barcode);
+      setOpenProductLinkModal(true);
+    }
+  };
+
   const columns = [
     {
       title: "Tên sản phẩm",
@@ -131,6 +146,40 @@ const InventoryForm = () => {
       key: "type",
     },
   ];
+
+  const productLinkColumns = [
+    {
+      title: "Tên sản phẩm",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Loại",
+      dataIndex: "category",
+      key: "category",
+    },
+    {
+      title: "Mô tả",
+      dataIndex: "description",
+      key: "description",
+    },
+  ];
+
+  const rowSelection = {
+    onChange: (_, selectedRows) => {
+      setSelectToLinkProductId(selectedRows[0].id);
+    },
+  };
+
+  const handleCancel = () => {
+    setOpenProductLinkModal(false);
+  };
+
+  const linkProductWithBarcode = async () => {
+    await linkProduct(selectToLinkProductId, barcodeToLinkProduct);
+    handleProductChange(selectToLinkProductId);
+    setOpenProductLinkModal(false);
+  };
 
   return (
     <Card style={{ width: 500, margin: "auto", marginTop: "50px" }}>
@@ -151,9 +200,14 @@ const InventoryForm = () => {
             <Radio value="export">Xuất kho</Radio>
           </Radio.Group>
         </Form.Item>
+        <Form.Item label="Barcode">
+          <Input
+            onPressEnter={(e) => selectProductByBarcode(e.target.value)}
+            ref={productSelectRef}
+          />
+        </Form.Item>
         <Form.Item label="Chọn sản phẩm">
           <Select
-            ref={productSelectRef}
             showSearch
             placeholder="Tìm kiếm sản phẩm"
             value={selectedProduct ? selectedProduct.id : null}
@@ -201,6 +255,20 @@ const InventoryForm = () => {
       >
         Xác nhận
       </Button>
+
+      <Modal
+        open={openProductLinkModal}
+        onCancel={handleCancel}
+        onOk={linkProductWithBarcode}
+        okText="Link"
+      >
+        <Table
+          columns={productLinkColumns}
+          dataSource={products}
+          rowSelection={{ type: "radio", ...rowSelection }}
+          rowKey={"id"}
+        ></Table>
+      </Modal>
     </Card>
   );
 };

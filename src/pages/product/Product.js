@@ -10,6 +10,7 @@ import {
 import { getUnits } from "../../services/unit-service";
 import { getCategories } from "../../services/category-service";
 import { getSuppliers } from "../../services/supplier-service";
+import { BarcodeOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -259,6 +260,17 @@ const ProductTable = () => {
         ) : (
           text
         ),
+    },
+    {
+      title: "Barcode",
+      dataIndex: "barcode",
+      key: "barcode",
+      render: (text) => (
+        <>
+          <BarcodeOutlined value={text} />
+          {text}
+        </>
+      ),
     },
     {
       title: "Weight (kg)",
