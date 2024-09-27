@@ -171,7 +171,9 @@ const ProductTable = () => {
       dataIndex: "thumbnail",
       key: "thumbnail",
       render: (thumbnail, record) => {
-        const imageUrl = `/images/${thumbnail}`; // Format the thumbnail URL
+        const imageUrl = thumbnail?.startsWith("http")
+          ? thumbnail
+          : `/images/${thumbnail}`; // Format the thumbnail URL
 
         return editingKey === record.id ? (
           <>
