@@ -173,7 +173,7 @@ const ProductTable = () => {
       render: (thumbnail, record) => {
         const imageUrl = thumbnail?.startsWith("http")
           ? thumbnail
-          : `/images/${thumbnail}`; // Format the thumbnail URL
+          : `${thumbnail}`; // Format the thumbnail URL
 
         return editingKey === record.id ? (
           <>
