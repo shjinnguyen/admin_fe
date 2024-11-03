@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Row, Table } from "antd";
 import moment from "moment";
+import { Link } from "react-router-dom";
+
 import { getOrderDetails, getOrders } from "../../services/order-service";
 
 const columns = [
@@ -75,9 +77,9 @@ const Order = () => {
             bordered={false}
             className="criclebox tablespace mb-24"
             extra={
-              <>
-                <Button onClick={() => {}}>Add New +</Button>
-              </>
+              <Link to="/order-form">
+                <Button>Make Order</Button>
+              </Link>
             }
           >
             <Table

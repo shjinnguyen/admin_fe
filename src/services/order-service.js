@@ -10,3 +10,7 @@ export const getOrders = async () => {
 export const getOrderDetails = async (orderId) => {
   return await axios.get(`${HOST_URL}/orders/${orderId}`);
 };
+
+export const makeOrder = async (data) => {
+  return await axios.post(`${HOST_URL}/orders`, data);
+};

@@ -1,0 +1,22 @@
+#order-form .ant-table-tbody .ant-form-item {
+  margin-bottom: 0;
+}
+
+#order-form #wrapper-table-order-item {
+  position: relative;
+}
+
+#order-form #wrapper-table-order-item > .ant-form-item {
+  position: absolute;
+  right: -150px;
+  bottom: -11px;
+  z-index: 2;
+}
+
+#order-form #wrapper-table-order-item #submit-order {
+  margin-top: 20px;
+}
+
+#order-form .submit-order-form-item {
+  text-align: center;
+}

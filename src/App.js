@@ -9,11 +9,12 @@ import Supplier from "./pages/supplier/Supplier";
 import Product from "./pages/product/Product";
 import Inventory from "./pages/inventory/Inventory";
 import InventoryForm from "./pages/inventory/ImportV2";
+import Order from "./pages/order/Order";
+import OrderForm from "./pages/order/OrderForm";
 
 import "antd/dist/antd.css";
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
-import Order from "./pages/order/Order";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/inventory" component={Inventory} />
           <Route exact path="/inventory-import" component={InventoryForm} />
           <Route exact path="/order" component={Order} />
+          <Route exact path="/order-form" component={OrderForm} />
         </Main>
       </Switch>
     </div>

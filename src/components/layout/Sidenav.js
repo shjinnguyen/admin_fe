@@ -71,6 +71,10 @@ function Sidenav({ color }) {
 
 const menuItems = [
   {
+    url: "/order",
+    title: "Order",
+  },
+  {
     url: "/inventory",
     title: "Inventory",
   },
