@@ -13,6 +13,7 @@ import InventoryForm from "./pages/inventory/ImportV2";
 import "antd/dist/antd.css";
 import "./assets/styles/main.css";
 import "./assets/styles/responsive.css";
+import Order from "./pages/order/Order";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/product" component={Product} />
           <Route exact path="/inventory" component={Inventory} />
           <Route exact path="/inventory-import" component={InventoryForm} />
+          <Route exact path="/order" component={Order} />
         </Main>
       </Switch>
     </div>

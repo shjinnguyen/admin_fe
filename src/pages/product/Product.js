@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Table, Tag, Button, message, Input, Select, Space } from "antd";
+import {
+  Table,
+  Tag,
+  Button,
+  message,
+  Input,
+  Select,
+  Space,
+  Row,
+  Col,
+  Card,
+} from "antd";
 import { Upload } from "antd";
 import {
   deleteProduct,
@@ -269,8 +280,7 @@ const ProductTable = () => {
       key: "barcode",
       render: (text) => (
         <>
-          <BarcodeOutlined value={text} />
-          {text}
+          <BarcodeOutlined value={text} /> {text}
         </>
       ),
     },
@@ -405,19 +415,26 @@ const ProductTable = () => {
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={addNewProduct}
-        style={{ marginBottom: 16 }}
-      >
-        New Product
-      </Button>
-      <Table
-        dataSource={[...products]}
-        columns={columns}
-        rowKey="id"
-        pagination={false}
-      />
+      <Row gutter={[24, 0]}>
+        <Col xs="24" xl={24}>
+          <Card
+            bordered={false}
+            className="criclebox tablespace mb-24"
+            extra={
+              <>
+                <Button onClick={addNewProduct}>Add New +</Button>
+              </>
+            }
+          >
+            <Table
+              dataSource={[...products]}
+              columns={columns}
+              rowKey="id"
+              pagination={false}
+            />
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };
